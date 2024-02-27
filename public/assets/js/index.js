@@ -16,11 +16,11 @@ const appendEventlisteners = () => {
         switch (evt.key) {
             case 'ArrowLeft':
             case 'a':
-                settings.snake.rotateLeft()
+                settings.rotation = -1
                 break;
             case 'ArrowRight':
             case 'd':
-                settings.snake.rotateRight()
+                settings.rotation = 1
                 break;
             case 'd':
                 if (settings.timerID) {
@@ -35,11 +35,27 @@ const appendEventlisteners = () => {
                 break;
         }
     })
+    window.addEventListener('keyup', evt => {
+        switch (evt.key) {
+            case 'ArrowLeft':
+            case 'a':
+            case 'ArrowRight':
+            case 'd':
+                settings.rotation = 0;
+                break;
+        }
+    })
+}
+
+const appendSocketEventListener = socket => {
+    socket.on('update', game.render);
 }
 
 const init = () => {
+    settings.socket = io.connect();
     domMapping();
     appendEventlisteners();
+    appendSocketEventListener(settings.socket);
     game.init();
 }
 

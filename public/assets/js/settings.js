@@ -6,8 +6,9 @@ const settings = {
     spielfeldHeight: 500,
     timerID: false,
     intervalDelay: 30,
-    snake: false,
     drops:[],
+    rotation:0,
+    socket:false,
 }
 
 export default settings;
