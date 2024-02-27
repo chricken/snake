@@ -9,6 +9,7 @@ const settings = {
     drops:[],
     rotation:0,
     socket:false,
+    io:false,
 }
 
 export default settings;

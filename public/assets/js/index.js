@@ -49,6 +49,7 @@ const appendEventlisteners = () => {
 
 const appendSocketEventListener = socket => {
     socket.on('update', game.render);
+    socket.on('you are dead', game.kill);
 }
 
 const init = () => {

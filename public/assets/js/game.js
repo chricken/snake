@@ -10,11 +10,9 @@ const game = {
             })
         }
     },
-    render(data) {
-        /*
-        console.clear();
-        console.log(JSON.stringify(data)); 
-        */
+    render(snakes, drops) {
+        // console.clear();
+        // console.log(JSON.stringify(data));
 
         let c = elements.spielfeld;
         let ctx = c.getContext('2d');
@@ -24,7 +22,7 @@ const game = {
         ctx.lineWidth = 2;
 
         // Schlangen iterieren
-        data.forEach(snake => {
+        snakes.forEach(snake => {
             ctx.beginPath();
             ctx.fillStyle = snake.color;
             ctx.arc(
@@ -34,12 +32,56 @@ const game = {
                 0,
                 2 * Math.PI
             )
+
+            for (let i = 0; i < snake.bodyParts.length; i++) {
+                let part = snake.bodyParts[i];
+                ctx.moveTo(
+                    (part.x * c.width) + (snake.radius * c.width * snake.radiusRatioHeadBody),
+                    (part.y * c.height) + (snake.radius * c.width * snake.radiusRatioHeadBody)
+                )
+                ctx.arc(
+                    part.x * c.width,
+                    part.y * c.height,
+                    snake.radius * c.width * snake.radiusRatioHeadBody,
+                    0,
+                    2 * Math.PI
+                )
+            }
+
             ctx.fill();
             ctx.stroke();
         })
+        // console.log(drops);
+        // Drops iterieren
+        drops.forEach(drop => {
+            ctx.fillStyle = '#000';
 
+            ctx.fillRect(
+                (drop.x - drop.size / 2) * c.width,
+                (drop.y - drop.size / 2) * c.height,
+                drop.size * c.width,
+                drop.size * c.height,
+            )
+
+        })
     },
-    addDrop() {
+    kill() {
+        alert('You are Dead!')
+        /*
+        if (confirm('You are Dead. Replay?')) {
+            settings.socket.emit('replay');
+        } else {
+
+        }
+        */
+    },
+    resizeSpielfeld() {
+
+        let w = window.innerWidth * .98;
+        let h = window.innerHeight * .98;
+
+        elements.spielfeld.width = Math.min(w, h);
+        elements.spielfeld.height = Math.min(w, h);
 
     },
     createSpielfeld() {
@@ -48,9 +90,11 @@ const game = {
         c.height = settings.spielfeldHeight;
         elements.main.append(c);
         elements.spielfeld = c;
+        game.resizeSpielfeld();
     },
     init() {
         game.createSpielfeld();
+        window.addEventListener('resize', game.resizeSpielfeld);
 
         // Spiel starten
         // game.update();

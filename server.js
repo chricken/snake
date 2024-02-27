@@ -25,11 +25,16 @@ io.on('connect', socket => {
 
     // Sockets und Snakes einhängen
     settings.sockets[socket.id] = socket;
-    const mySnake = game.addSnake(socket);
+    let mySnake = game.addSnake(socket);
 
     socket.on('update', data => {
         mySnake.userInput(data)
     });
+
+    socket.on('replay', () => {
+        // delete settings.sockets[socket.id];
+        mySnake = game.addSnake(socket);
+    })
 
     // Browser hat das Spiel verlassen
     socket.on('disconnect', () => {
@@ -44,11 +49,14 @@ const init = () => {
         if (err) console.log(err);
         else {
             console.log('Server läuft');
+            game.init(io);
+            /*
             settings.timerID = setInterval(
                 game.update,
                 settings.intervalDelay,
                 io
             );
+            */
         }
 
     })

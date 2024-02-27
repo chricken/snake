@@ -5,7 +5,11 @@ const settings = {
     intervalDelay: 30,
     snakes: [],
     drops:[],
-    sockets:{}
+    sockets:{},
+    dropDelayMin : 1000,
+    dropDelayMax : 3000,
+    dropDelay:2000,
+    startDrops:200,
 }
 
 export default settings;
