@@ -21,6 +21,20 @@ class Snake {
             new Bodypart(),
             new Bodypart(),
             new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
+            new Bodypart(),
         ]
     }
     userInput(data) {

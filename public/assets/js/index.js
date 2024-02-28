@@ -3,6 +3,7 @@
 // Import 
 import settings, { elements } from './settings.js';
 import game from './game.js';
+import '/assets/components/startdialogue/startdialogue.js'
 
 // KONSTANTEN / VARIABLEN
 

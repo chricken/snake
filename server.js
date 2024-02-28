@@ -50,13 +50,6 @@ const init = () => {
         else {
             console.log('Server läuft');
             game.init(io);
-            /*
-            settings.timerID = setInterval(
-                game.update,
-                settings.intervalDelay,
-                io
-            );
-            */
         }
 
     })
