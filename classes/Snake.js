@@ -4,6 +4,8 @@ import helpers from '../helpers.js';
 import settings from '../settings.js';
 import Bodypart from './Bodypart.js';
 
+let timerIDExtra = false;
+
 class Snake {
     constructor(socket) {
         this.x = Math.random();
@@ -13,29 +15,18 @@ class Snake {
         this.angle = helpers.createNumber(0, 360) / 180 * Math.PI;
         this.speedRotation = .12;
         this.speed = .008;
+        this.fastSpeed = .012;
+        this.normalSpeed = .008;
         this.score = 0;
         this.socketID = socket.id;
         this.einflussBereich = .015;
         this.color = `hsl(${~~(Math.random() * 360)},80%,70%)`;
-        this.bodyParts = [
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-            new Bodypart(),
-        ]
+        this.bodyParts = [];
+        this.durationExtra = 5000;
+        this.timerIDExtra = false;
+        for (let i = 0; i < settings.snakeStartBodyParts; i++)
+            this.bodyParts.push(new Bodypart());
+        // console.log(this.bodyParts);
     }
     userInput(data) {
         this.angle -= data.rotation * this.speedRotation;
@@ -43,7 +34,6 @@ class Snake {
         this.angle = this.angle % (Math.PI * 2);
     }
     updateBodyParts() {
-
         if (this.bodyParts.length) {
             // update() überträgt die neue Position in einen Puffer. 
             // Hier wird er schrittweise nach hinten weitergereicht, bis er angezeigt wird.
@@ -74,7 +64,7 @@ class Snake {
 
         this.updateBodyParts();
     }
-    kill(){
+    kill() {
         let socket = settings.sockets[this.socketID];
         socket.emit('you are dead');
     }
@@ -88,11 +78,30 @@ class Snake {
             )
             if (distance <= this.einflussBereich) {
                 settings.drops = settings.drops.filter(el => el != drop);
-                this.bodyParts.push(new Bodypart());
+
+                if (drop.extra == 'fast') {
+                    // Schneller
+                    this.speed = this.fastSpeed;
+
+                    if (timerIDExtra) clearInterval(timerIDExtra);
+
+                    // console.log(this.timerIDExtra);
+                    timerIDExtra = setTimeout(() => {
+                        this.speed = this.normalSpeed;
+                    }, this.durationExtra)
+
+                } else {
+                    // Normale Verlängerung
+                    for (let i = 0; i < drop.numAdd; i++) {
+                        this.bodyParts.push(new Bodypart());
+                    }
+                }
             }
         }
 
         // Hittest gegen die anderen Schlangen
+        // Flag für einen Hit. Sonst könnten mehrere Hits ausgelöst werden
+        let isHit = false;
         for (let i = 0; i < settings.snakes.length; i++) {
             let snake = settings.snakes[i];
             for (let j = 0; j < snake.bodyParts.length; j++) {
@@ -104,12 +113,14 @@ class Snake {
                 )
                 if (distance <= this.einflussBereich) {
                     // Erstmal die Snake entfernen
-                    // console.log('hit', snake);
+                    // console.log('hit', part);
                     settings.snakes = settings.snakes.filter(s => s != this);
-                    this.kill();
+                    isHit = true;
                 }
             }
         }
+
+        if (isHit) this.kill();
     }
     init() {
 

@@ -6,8 +6,14 @@ class Drop {
         this.y = Math.random();
         this.numAdd = numAdd;
         this.size = .015;
+        this.extra = false;
+
+        if (Math.random() < .05) {
+            this.extra = 'fast'
+        }
+
     }
-    update(){
+    update() {
 
     }
 }

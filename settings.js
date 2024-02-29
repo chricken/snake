@@ -7,9 +7,12 @@ const settings = {
     drops:[],
     sockets:{},
     dropDelayMin : 1000,
-    dropDelayMax : 3000,
+    dropDelayMax : 5000,
     dropDelay:2000,
-    startDrops:200,
+    startDrops:10,
+    snakeStartBodyParts: 5,
+    minDropsToAdd:1,
+    maxDropsToAdd:3,
 }
 
 export default settings;

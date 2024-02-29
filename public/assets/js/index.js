@@ -10,6 +10,7 @@ import '/assets/components/startdialogue/startdialogue.js'
 // FUNKTIONEN
 const domMapping = () => {
     elements.main = document.querySelector('main');
+    elements.score = document.querySelector('#score');
 }
 
 const appendEventlisteners = () => {
@@ -22,17 +23,6 @@ const appendEventlisteners = () => {
             case 'ArrowRight':
             case 'd':
                 settings.rotation = 1
-                break;
-            case 'd':
-                if (settings.timerID) {
-                    clearInterval(settings.timerID);
-                    settings.timerID = false;
-                } else {
-                    settings.timerID = setInterval(
-                        game.update,
-                        settings.intervalDelay
-                    )
-                }
                 break;
         }
     })

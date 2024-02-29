@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'first';
+    src: url('../fonts/forque-webfont.woff2') format('woff2'),
+         url('../fonts/forque-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
     position: relative;
     display: block;
@@ -11,4 +19,19 @@ canvas {
     border: 1px solid #ccc;
     margin-left: auto;
     margin-right: auto;
+}
+
+#ui {
+    position: fixed;
+    bottom:0;
+    right:0;
+    left: 0;
+}
+
+#score {
+    position: absolute;
+    font-family: 'first';
+    font-size: 50px;
+    right:20px;
+    bottom:20px;
 }

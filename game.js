@@ -21,10 +21,17 @@ const game = {
         setTimeout(game.timedDrop, settings.dropDelay)
     },
     addDrop() {
-        settings.drops.push(new Drop(3))
+        settings.drops.push(new Drop(
+            helpers.createNumber(
+                settings.minDropsToAdd,
+                settings.maxDropsToAdd
+            )
+        ))
     },
     addSnake(socket) {
         let mySnake = new Snake(socket);
+        // Vorsichtshalber nochmal löschen
+        settings.snakes = settings.snakes.filter(snake => snake.socketID != socket.id);
         settings.snakes.push(mySnake)
         return mySnake;
     },

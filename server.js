@@ -25,14 +25,15 @@ io.on('connect', socket => {
 
     // Sockets und Snakes einhängen
     settings.sockets[socket.id] = socket;
-    let mySnake = game.addSnake(socket);
+    let mySnake;
 
     socket.on('update', data => {
+        // console.log(data);
         mySnake.userInput(data)
     });
 
-    socket.on('replay', () => {
-        // delete settings.sockets[socket.id];
+    socket.on('createSnake', () => {
+        //delete settings.sockets[socket.id];
         mySnake = game.addSnake(socket);
     })
 
