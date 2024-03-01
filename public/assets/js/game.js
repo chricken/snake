@@ -32,10 +32,17 @@ const game = {
         game.resizeSpielfeld();
     },
     start(evt) {
-        settings.socket.emit('createSnake', {
-            name: evt.detail ? evt.detail.name : settings.snake.color,
-            color: evt.detail ? evt.detail.color : settings.snake.name,
-        });
+        if (evt.detail) {
+            settings.socket.emit('createSnake', {
+                name: evt.detail.name,
+                color: evt.detail.color
+            });
+        } else {
+            settings.socket.emit('createSnake', {
+                name: settings.snake.name,
+                color: settings.snake.color
+            });
+        }
         clearInterval(settings.timerID);
         settings.timerID = setInterval(
             game.update,
@@ -58,6 +65,9 @@ const game = {
         restartDialogue.addEventListener('observe', game.observe);
 
         document.body.append(restartDialogue);
+    },
+    updateSnakeData(snake){
+        settings.snake = snake;
     },
     init() {
         game.createSpielfeld();

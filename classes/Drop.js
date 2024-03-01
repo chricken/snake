@@ -8,7 +8,7 @@ class Drop {
         this.size = .015;
         this.extra = false;
 
-        if (Math.random() < .05) {
+        if (Math.random() < .1) {
             this.extra = 'fast'
         }
 

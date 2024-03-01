@@ -30,7 +30,7 @@ elMsg.append(containerBtns);
 const btnStart = document.createElement('button');
 btnStart.className = 'btnStart';
 containerBtns.append(btnStart);
-btnStart.innerHTML = 'Start';
+btnStart.innerHTML = 'Restart Game';
 
 const btnObserve = document.createElement('button');
 btnObserve.className = 'btnObserve';

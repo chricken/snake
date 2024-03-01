@@ -182,8 +182,7 @@ const render = {
     all(snakes, drops) {
         let c = elements.spielfeld;
         let ctx = c.getContext('2d');
-        settings.snake = snakes.find(snake => snake.socketID == settings.socket.id);
-
+        
         ctx.clearRect(0, 0, c.width, c.height);
         render.names(snakes);
         render.renderSnakes(snakes);
