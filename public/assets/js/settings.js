@@ -10,6 +10,7 @@ const settings = {
     rotation:0,
     socket:false,
     io:false,
+    snake: false
 }
 
 export default settings;

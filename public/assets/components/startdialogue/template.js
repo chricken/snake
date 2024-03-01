@@ -16,8 +16,45 @@ const elMsg = document.createElement('div');
 elMsg.className = 'msg';
 bg.append(elMsg);
 
-const elSlot = document.createElement('slot');
-elMsg.append(elSlot);
+const elContent = document.createElement('p');
+elMsg.append(elContent);
+elContent.innerHTML = `<h3>Willkommen bei Schnake</h3>
+Bitte wählen Sie, ob Sie das Spiel starten oder als Beobachter beitreten wollen.<br>
+Zum Mitspielen, wählen Sie außerdem einen Namen und eine Farbe.<br>
+Um diese zu ändern, musst Du das Spiel neu laden.
+`
+
+// Eingabe des Namens
+const elInputName = document.createElement('div');
+elMsg.append(elInputName);
+
+const legendName = document.createElement('span');
+elInputName.append(legendName);
+legendName.innerHTML = 'Ihr Name: ';
+
+const inputName = document.createElement('input');
+inputName.type = 'text';
+inputName.name = 'name';
+let num = ~~(Math.random() * 1e6);
+console.log(num);
+inputName.value = `Player ${num.toString(36)}`;
+elInputName.append(inputName);
+
+// EIngabe der Farbe
+const elInputColor = document.createElement('div');
+elMsg.append(elInputColor);
+
+const legendColor = document.createElement('span');
+legendColor.innerHTML = 'Ihre Zeichenfarbe: ';
+elInputColor.append(legendColor);
+
+const hex = () => Math.floor(Math.random() * 16).toString(16);
+const inputColor = document.createElement('input');
+inputColor.type = 'color';
+inputColor.name = 'color';
+inputColor.value = '#' + hex() + hex() + hex() + hex() + hex() + hex();
+elInputColor.append(inputColor);
+console.log(inputColor.value);
 
 const containerBtns = document.createElement('div');
 containerBtns.className = 'containerBtns';

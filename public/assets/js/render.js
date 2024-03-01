@@ -129,30 +129,6 @@ const render = {
             ctx.fill();
             ctx.stroke();
 
-            // 
-            // 
-            /*
-        ctx.beginPath();
-        ctx.fillStyle = snake.color;
-        
-        for (let i = 0; i < snake.bodyParts.length; i++) {
-            let part = snake.bodyParts[i];
-            ctx.moveTo(
-                (part.x * c.width) + (snake.radius * c.width * snake.radiusRatioHeadBody),
-                (part.y * c.height)
-            )
-            ctx.arc(
-                part.x * c.width,
-                part.y * c.height,
-                snake.radius * c.width * snake.radiusRatioHeadBody,
-                0,
-                2 * Math.PI
-            )
-        }
-        
-        ctx.fill();
-        ctx.stroke();
-        */
         })
     },
     renderDrops(drops) {
@@ -186,11 +162,30 @@ const render = {
 
         })
     },
+    names(snakes) {
+        elements.names.innerHTML = '';
+
+        snakes.forEach(snake => {
+            let nameContainer = document.createElement('div');
+            elements.names.append(nameContainer);
+
+            let elColor = document.createElement('span');
+            elColor.className = 'snakeColor'
+            elColor.style.backgroundColor = snake.color;
+            nameContainer.append(elColor);
+
+            let elName = document.createElement('span');
+            elName.innerHTML = snake.name;
+            nameContainer.append(elName);
+        })
+    },
     all(snakes, drops) {
         let c = elements.spielfeld;
         let ctx = c.getContext('2d');
-        ctx.clearRect(0, 0, c.width, c.height);
+        settings.snake = snakes.find(snake => snake.socketID == settings.socket.id);
 
+        ctx.clearRect(0, 0, c.width, c.height);
+        render.names(snakes);
         render.renderSnakes(snakes);
         render.renderDrops(drops);
     }

@@ -24,6 +24,7 @@ class Snake {
         this.bodyParts = [];
         this.durationExtra = 5000;
         this.timerIDExtra = false;
+        this.name = 'default';
         for (let i = 0; i < settings.snakeStartBodyParts; i++)
             this.bodyParts.push(new Bodypart());
         // console.log(this.bodyParts);

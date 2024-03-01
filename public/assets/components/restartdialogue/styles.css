@@ -1,0 +1,37 @@
+.bg {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.5);
+}
+
+.msg {
+    position: relative;
+    display: block;
+    width: 50%;
+    height: 50vh;
+    background: #fff;
+    padding: 20px;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+}
+
+.containerBtns {
+    position: absolute;
+    display: flex;
+    left:20px;
+    right:20px;
+    bottom:20px;
+    justify-content: center;
+    align-items: center;
+}
+.containerBtns button{
+    position: relative;
+    font-size: 1.2em;
+    margin:5px;
+}

@@ -2,7 +2,7 @@
 
 import template from './template.js';
 
-class Start extends HTMLElement {
+class restart extends HTMLElement {
     constructor() {
         super();
         this.root = this.attachShadow({
@@ -15,23 +15,16 @@ class Start extends HTMLElement {
     connectedCallback() {
         const btnStart = this.root.querySelector('.btnStart');
         const btnObserve = this.root.querySelector('.btnObserve');
-        const inputName = this.root.querySelector('input[name="name"]');
-        const inputColor = this.root.querySelector('input[name="color"]');
 
+        const evtStart = new CustomEvent('start');
+        const evtObserve = new CustomEvent('observe');
 
         btnStart.addEventListener('click', () => {
-            const evtStart = new CustomEvent('start', {
-                detail: {
-                    name: inputName.value,
-                    color: inputColor.value
-                }
-            });
             this.dispatchEvent(evtStart);
             this.remove();
         })
-
+        
         btnObserve.addEventListener('click', () => {
-            const evtObserve = new CustomEvent('observe');
             this.dispatchEvent(evtObserve);
             this.remove();
         })
@@ -41,4 +34,4 @@ class Start extends HTMLElement {
     }
 }
 
-customElements.define('start-dialogue', Start);
+customElements.define('restart-dialogue', restart);

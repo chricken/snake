@@ -32,9 +32,9 @@ io.on('connect', socket => {
         mySnake.userInput(data)
     });
 
-    socket.on('createSnake', () => {
+    socket.on('createSnake', data => {
         //delete settings.sockets[socket.id];
-        mySnake = game.addSnake(socket);
+        mySnake = game.addSnake(socket, data);
     })
 
     // Browser hat das Spiel verlassen

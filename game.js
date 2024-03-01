@@ -28,8 +28,10 @@ const game = {
             )
         ))
     },
-    addSnake(socket) {
+    addSnake(socket, data) {
         let mySnake = new Snake(socket);
+        mySnake.color = data.color;
+        mySnake.name = data.name;
         // Vorsichtshalber nochmal löschen
         settings.snakes = settings.snakes.filter(snake => snake.socketID != socket.id);
         settings.snakes.push(mySnake)

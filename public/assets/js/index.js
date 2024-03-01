@@ -5,6 +5,7 @@ import settings, { elements } from './settings.js';
 import game from './game.js';
 import render from './render.js';
 import '/assets/components/startdialogue/startdialogue.js'
+import '/assets/components/restartdialogue/restartdialogue.js';
 
 // KONSTANTEN / VARIABLEN
 
@@ -12,6 +13,7 @@ import '/assets/components/startdialogue/startdialogue.js'
 const domMapping = () => {
     elements.main = document.querySelector('main');
     elements.score = document.querySelector('#score');
+    elements.names = document.querySelector('#names');
 }
 
 const appendEventlisteners = () => {
