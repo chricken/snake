@@ -20,13 +20,15 @@ const game = {
         )
         setTimeout(game.timedDrop, settings.dropDelay)
     },
-    addDrop() {
-        settings.drops.push(new Drop(
-            helpers.createNumber(
-                settings.minDropsToAdd,
-                settings.maxDropsToAdd
-            )
-        ))
+    addDrop(ignoreSnake = false) {
+        if (settings.snakes.length || ignoreSnake) {
+            settings.drops.push(new Drop(
+                helpers.createNumber(
+                    settings.minDropsToAdd,
+                    settings.maxDropsToAdd
+                )
+            ))
+        }
     },
     addSnake(socket, data) {
         let mySnake = new Snake(socket);
@@ -49,7 +51,7 @@ const game = {
         )
 
         for (let i = 0; i < settings.startDrops; i++) {
-            game.addDrop();
+            game.addDrop(true);
         }
 
         // Timeout für Drops
