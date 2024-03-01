@@ -3,6 +3,7 @@
 // Import 
 import settings, { elements } from './settings.js';
 import game from './game.js';
+import render from './render.js';
 import '/assets/components/startdialogue/startdialogue.js'
 
 // KONSTANTEN / VARIABLEN
@@ -39,7 +40,7 @@ const appendEventlisteners = () => {
 }
 
 const appendSocketEventListener = socket => {
-    socket.on('update', game.render);
+    socket.on('update', render.all);
     socket.on('you are dead', game.kill);
 }
 

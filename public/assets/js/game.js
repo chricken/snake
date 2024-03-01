@@ -9,7 +9,7 @@ const game = {
                 rotation: settings.rotation
             })
         }
-    },
+    },/* 
     render(snakes, drops) {
         let c = elements.spielfeld;
         let ctx = c.getContext('2d');
@@ -97,17 +97,7 @@ const game = {
                 ctx.stroke();
 
             } else {
-                /*
-                ctx.fillStyle = '#000';
-                ctx.fillRect(
-                    (drop.x - drop.size / 2) * c.width,
-                    (drop.y - drop.size / 2) * c.height,
-                    drop.size * c.width,
-                    drop.size * c.height,
-                )
-                */
-
-                ctx.fillStyle = '#000';
+                               ctx.fillStyle = '#000';
                 ctx.font = `${drop.size * c.width}px Tahoma, Geneva, Verdana, sans-serif`;
                 ctx.fillText(
                     drop.numAdd,
@@ -117,7 +107,7 @@ const game = {
             }
 
         })
-    },
+    }, */
     kill() {
         clearInterval(settings.timerID)
         game.restartDialogue();
